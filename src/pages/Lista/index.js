@@ -60,7 +60,9 @@ function Lista({ navigation }) {
               ><Icon name="add-shopping-cart" color="#fff" size={30} /></TouchableOpacity>
 
               <TouchableOpacity
-                onPress = {() => {}}
+                onPress = {() => {
+                  navigation.navigate("EditarItem")
+                }}
               ><Icon name="create" color="#0984e3" size={30} /></TouchableOpacity>
 
               <TouchableOpacity
@@ -80,7 +82,9 @@ function Lista({ navigation }) {
 
     <TouchableOpacity
       style = {styles.btnAddList}
-      onPress = {() => {}}
+      onPress = {() => {
+        navigation.navigate("AddLista")
+      }}
     ><Icon name="add" color="#FFF" size={30} /></TouchableOpacity>
     </>
   )

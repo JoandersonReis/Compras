@@ -11,10 +11,6 @@ function Carrinho({ navigation }) {
 
   async function loadItems(items) {
     await setItemsCarrinho(items)
-
-    itemsCarrinho.map((item) => {
-      setValueTotal(valueTotal + item.valor)
-    })
   }
 
   useEffect(()=> {
@@ -57,7 +53,6 @@ function Carrinho({ navigation }) {
       },
     ]
     loadItems(data)
-    
   }, [])
 
   return (
@@ -78,7 +73,7 @@ function Carrinho({ navigation }) {
             <TouchableOpacity
                 style = {styles.removeBtn}
                 onPress = {() => {}}
-            ><Icon name="delete-forever" color="#FFF" size={30} /></TouchableOpacity>    
+            ><Icon name="delete-forever" color="#FFF" size={30} /></TouchableOpacity>
           </View>
         )}
       />
@@ -87,7 +82,7 @@ function Carrinho({ navigation }) {
         onPress = {() => {
           navigation.goBack()
         }}
-      ><Text style={styles.finishShopText}>Finalizar Compra R$ {valueTotal}</Text></TouchableOpacity>
+      ><Text style={styles.finishShopText}>Finalizar Compra</Text></TouchableOpacity>
     </LinearGradient>
   )
 }
