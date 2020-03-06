@@ -69,6 +69,21 @@ const styles = StyleSheet.create({
   },
 
   // Page Carrinho
+  containerCar: {
+    position: "absolute",
+    backgroundColor: "#ee5253",
+    right: 10,
+    padding: 10,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4
+  },
+
+  textCar: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+
   removeBtn: {
     backgroundColor: "#d63031",
     width: "100%",
