@@ -12,6 +12,10 @@ function Lista({ navigation }) {
   const [ lista, setLista ] = useState([])
   const [ update, setUpdate ] = useState(0)
 
+  if(navigation.getParam("finished") == true) {
+    setUpdate(update + 1)
+  }
+
   useEffect(() => {
     async function loadLista() {
       const realm = await getRealm()

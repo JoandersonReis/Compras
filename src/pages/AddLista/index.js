@@ -12,6 +12,7 @@ function App({ navigation }) {
   const [ id, setId ] = useState(0)
   const [ updateId, setUpdateId ] = useState(0)
 
+
   useEffect(() => {
     async function addId() {
       const realm = await getRealm()
@@ -28,27 +29,31 @@ function App({ navigation }) {
   }, [updateId])
 
   async function handleAddLista() {
-    const data = {
-      id: id,
-      name: textName,
-      weight: textWeight,
-      value: textValue,
-      car: 0
+    if(textName != "" && textWeight != "" && textValue != "") {
+      const data = {
+        id: id,
+        name: textName,
+        weight: textWeight,
+        value: textValue,
+        car: 0
+      }
+  
+      const realm = await getRealm()
+  
+      realm.write(() => {
+        realm.create("Lista", data)
+      })
+  
+      setTextName("")
+      setTextWeight("")
+      setTextValue(0)
+  
+      setUpdateId(updateId + 1)
+  
+      navigation.navigate("Lista", {refreseh: true})
+    } else {
+      alert("Preencha todos os campos")
     }
-
-    const realm = await getRealm()
-
-    realm.write(() => {
-      realm.create("Lista", data)
-    })
-
-    setTextName("")
-    setTextWeight("")
-    setTextValue(0)
-
-    setUpdateId(updateId + 1)
-
-    navigation.navigate("Lista")
   }
 
   return (

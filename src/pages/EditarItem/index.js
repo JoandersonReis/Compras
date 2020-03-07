@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, TextInput, TouchableOpacity } from 'react-native'
+import { Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import LinearGradient from "react-native-linear-gradient"
 
 import styles from "./styles"
@@ -12,21 +12,25 @@ function App({ navigation }) {
   const [ textValue, setTextValue ] = useState(navigation.getParam("value"))
 
   async function handleEditItem() {
-    const data = {
-      id: navigation.getParam("id"),
-      name: textName,
-      weight: textWeight,
-      value: Number(textValue),
-      car: navigation.getParam("car")
+    if(textName != "" && textWeight != "" && textValue != "") {
+      const data = {
+        id: navigation.getParam("id"),
+        name: textName,
+        weight: textWeight,
+        value: Number(textValue),
+        car: navigation.getParam("car")
+      }
+  
+      const realm = await getRealm()
+  
+      realm.write(() => {
+        realm.create("Lista", data, "all")
+      })
+  
+      navigation.navigate("Lista", {refreseh: true})
+    } else {
+      alert("Preencha todos os campos")
     }
-
-    const realm = await getRealm()
-
-    realm.write(() => {
-      realm.create("Lista", data, "all")
-    })
-
-    navigation.goBack()
   }
 
   return (
@@ -39,6 +43,7 @@ function App({ navigation }) {
         onChangeText = {text => setTextName(text)}
       />
       <TextInput 
+        keyboardType = "numeric" 
         style = {styles.inputWeight}
         placeholder = "Digite o Peso"
         defaultValue={navigation.getParam("weight")}
